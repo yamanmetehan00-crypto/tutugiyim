@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TUTU</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif}
+body{background:#FFE6F0;padding-bottom:90px}
+header{display:flex;align-items:center;padding:1rem 1.5rem;background:linear-gradient(90deg,#D78CA1,#FF6FB5);color:#fff}
+.logo{font-size:2rem;font-weight:700}
+.header-right{margin-left:auto}
+.header-right span{font-size:1.6rem;cursor:pointer}
+
+.products{padding:1.5rem}
+.products h2{color:#FF1493;margin-bottom:1rem}
+
+.slider{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory}
+.product-card{min-width:80%;background:#fff;border-radius:15px;padding:1rem;scroll-snap-align:start}
+.product-card img{width:100%;border-radius:10px}
+.product-card h3{color:#FF6FB5;margin:.5rem 0}
+.price{color:#FF1493;font-weight:700}
+
+.bottom-bar{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:.6rem 0}
+.bottom-card{background:#FF6FB5;color:#fff;padding:.6rem 1rem;border-radius:10px;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">TUTU</div>
+  <div class="header-right">
+    <span onclick="location.href='cart.html'">🛒</span>
+  </div>
+</header>
+
+<section class="products">
+<h2>Öne Çıkanlar</h2>
+<div class="slider">
+  <div class="product-card" onclick="goProduct(1,'Ürün 1',199)">
+    <img src="images/test.jpg">
+    <h3>Ürün 1</h3>
+    <div class="price">₺199</div>
+  </div>
+  <div class="product-card" onclick="goProduct(2,'Ürün 2',249)">
+    <img src="images/test.jpg">
+    <h3>Ürün 2</h3>
+    <div class="price">₺249</div>
+  </div>
+</div>
+</section>
+
+<div class="bottom-bar">
+  <div class="bottom-card">👤 Profil</div>
+  <div class="bottom-card">🛍️ Kategori</div>
+  <div class="bottom-card">✨ Yeni</div>
+</div>
+
+<script>
+function goProduct(id,name,price){
+  location.href=`product.html?id=${id}&name=${name}&price=${price}`
+}
+</script>
+
+</body>
+</html>

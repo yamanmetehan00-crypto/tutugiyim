@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ürün Detay | TUTU</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif}
+body{background:#FFE6F0;padding-bottom:90px}
+header{display:flex;align-items:center;padding:1rem 1.5rem;background:linear-gradient(90deg,#D78CA1,#FF6FB5);color:#fff}
+.logo{font-size:2rem;font-weight:700}
+.header-right{margin-left:auto}
+.header-right span{font-size:1.6rem;cursor:pointer}
+
+.detail{padding:1.5rem}
+.main-img{width:100%;border-radius:15px;margin-bottom:.5rem}
+.gallery{display:flex;gap:8px;margin-bottom:1rem}
+.gallery img{width:60px;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.gallery img.active{border-color:#FF6FB5}
+
+.detail h2{color:#FF1493}
+.price{font-size:1.3rem;font-weight:700;margin:.5rem 0}
+
+.select-box{margin:.8rem 0}
+select,input{width:100%;padding:.6rem;border-radius:10px;border:none}
+
+button{width:100%;padding:1rem;background:#FF6FB5;color:#fff;border:none;border-radius:12px;font-size:1rem;margin-top:1rem}
+
+.bottom-bar{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:.6rem 0}
+.bottom-card{background:#FF6FB5;color:#fff;padding:.6rem 1rem;border-radius:10px;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">TUTU</div>
+  <div class="header-right">
+    <span onclick="location.href='cart.html'">🛒</span>
+  </div>
+</header>
+
+<div class="detail">
+  <img id="mainImg" class="main-img" src="images/test.jpg">
+
+  <div class="gallery">
+    <img src="images/test.jpg" class="active" onclick="changeImg(this)">
+    <img src="images/test2.jpg" onclick="changeImg(this)">
+    <img src="images/test3.jpg" onclick="changeImg(this)">
+    <img src="images/test4.jpg" onclick="changeImg(this)">
+  </div>
+
+  <h2 id="name"></h2>
+  <div class="price" id="price"></div>
+
+  <div class="select-box">
+    <b>Beden</b>
+    <select id="size">
+      <option>S</option>
+      <option>M</option>
+      <option>L</option>
+      <option>XL</option>
+    </select>
+  </div>
+
+  <div class="select-box">
+    <b>Renk</b>
+    <select id="color">
+      <option>Siyah</option>
+      <option>Pembe</option>
+      <option>Beyaz</option>
+    </select>
+  </div>
+
+  <div class="select-box">
+    <b>Adet</b>
+    <input type="number" id="qty" value="1" min="1">
+  </div>
+
+  <button onclick="addCart()">Sepete Ekle</button>
+</div>
+
+<div class="bottom-bar">
+  <div class="bottom-card" onclick="history.back()">⬅ Geri</div>
+  <div class="bottom-card">🛍️ Kategori</div>
+  <div class="bottom-card">✨ Yeni</div>
+</div>
+
+<script>
+const q=new URLSearchParams(location.search)
+const productBase={
+  id:q.get("id"),
+  name:q.get("name"),
+  price:Number(q.get("price")),
+}
+
+document.getElementById("name").innerText=productBase.name
+document.getElementById("price").innerText="₺"+productBase.price
+
+function changeImg(el){
+  document.getElementById("mainImg").src=el.src
+  document.querySelectorAll(".gallery img").forEach(i=>i.classList.remove("active"))
+  el.classList.add("active")
+}
+
+function addCart(){
+  const product={
+    ...productBase,
+    size:document.getElementById("size").value,
+    color:document.getElementById("color").value,
+    qty:Number(document.getElementById("qty").value),
+    image:document.getElementById("mainImg").src
+  }
+
+  let cart=JSON.parse(localStorage.getItem("cart"))||[]
+  cart.push(product)
+  localStorage.setItem("cart",JSON.stringify(cart))
+  location.href="cart.html"
+}
+</script>
+
+</body>
+</html>

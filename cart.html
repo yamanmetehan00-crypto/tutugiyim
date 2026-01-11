@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sepet | TUTU</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Montserrat,sans-serif}
+body{background:#FFE6F0;padding-bottom:90px}
+header{padding:1rem;background:linear-gradient(90deg,#D78CA1,#FF6FB5);color:#fff;font-size:2rem;font-weight:700}
+
+.cart{padding:1.5rem}
+.item{display:flex;gap:10px;background:#fff;padding:.8rem;border-radius:12px;margin-bottom:10px}
+.item img{width:60px;border-radius:8px}
+.total{font-size:1.3rem;font-weight:700;margin:1rem 0}
+
+button{width:100%;padding:1rem;background:#FF1493;color:#fff;border:none;border-radius:12px;font-size:1rem}
+
+.bottom-bar{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;padding:.6rem 0}
+.bottom-card{background:#FF6FB5;color:#fff;padding:.6rem 1rem;border-radius:10px;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<header>TUTU</header>
+
+<div class="cart" id="cart"></div>
+
+<div class="total">Toplam: <span id="total">₺0</span></div>
+
+<button>🔒 Güvenli Ödemeye Geç</button>
+
+<div class="bottom-bar">
+  <div class="bottom-card" onclick="location.href='index.html'">🏠 Ana Sayfa</div>
+  <div class="bottom-card">🛍️ Kategori</div>
+  <div class="bottom-card">✨ Yeni</div>
+</div>
+
+<script>
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
+let total=0
+const box=document.getElementById("cart")
+
+cart.forEach(p=>{
+  total+=p.price
+  box.innerHTML+=`
+    <div class="item">
+      <img src="${p.image}">
+      <div>
+        <b>${p.name}</b><br>₺${p.price}
+      </div>
+    </div>`
+})
+
+document.getElementById("total").innerText="₺"+total
+</script>
+
+</body>
+</html>
